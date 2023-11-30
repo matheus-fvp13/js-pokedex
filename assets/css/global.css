@@ -23,10 +23,17 @@
 }
 
 .content ol.pokemons li {
-    height: 150px;
+    display: flex;
+    flex-direction: column;
     margin: .5rem;
     padding: 2rem 1rem;
     background-color: #14a06fde;
     color: #FFF;
     border-radius: 1rem;
+}
+
+ol.pokemons li img {
+    max-width: 100%;
+    height: 120px;
+    align-self: flex-end;
 }
