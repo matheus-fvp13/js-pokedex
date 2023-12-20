@@ -1,11 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;700;900&family=Roboto:wght@100;300;500;700&display=swap');
 
+:root {
+    --normal: #a8a878;
+    --glass: #78c850;
+    --fire: #f05030;
+    --water: #6890f0;
+    --electric: #f8d030;
+    --ice: #98d8d8;
+    --ground: #e0c068;
+    --flying: #a890f0;
+    --poison: #a040a0;
+    --fighting: #bf3029;
+    --psychic: #f85888;
+    --dark: #725847;
+    --rock: #b8a137;
+    --bug: #a8b720;
+    --ghost: #6e5896;
+    --steel: #b9b7cf;
+    --dragon: #613816;
+    --fairy: #D685AD;
+}
+
 * {
     font-family: 'Roboto', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    color: #FFF;
 }
 
 body {
@@ -17,6 +37,61 @@ body {
     background-color: #FFF;
     height: 100vh;
     width: 100vw;
+}
+
+.normal {
+    background-color: var(--normal);
+}
+.grass{ 
+    background-color: var(--glass);
+}
+.fire {
+    background-color: var(--fire);
+}
+.water { 
+    background-color: var(--water);
+}
+.electric { 
+    background-color: var(--electric);
+}
+.ice {
+    background-color: var(--ice);
+}
+.ground {
+    background-color: var(--ground);
+}
+.flying {
+    background-color: var(--flying);
+}
+.poison {
+    background-color: var(--poison);
+}
+.fighting { 
+    background-color: var(--fighting);
+}
+.psychic {
+    background-color: var(--psychic);
+}
+.dark {
+    background-color: var(--dark);
+}
+.rock { 
+    background-color: var(--rock);
+}
+.bug { 
+    background-color: var(--bug);
+}
+.ghost{ 
+    background-color: var(--ghost);
+}
+.steel{ 
+    background-color: var(--steel);
+}
+.dragon{
+    background-color:  var(--dragon);
+}
+.fairy{ 
+    background-color: var(--fairy);
 }
 
 @media screen and (min-width: 992px){

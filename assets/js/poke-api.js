@@ -15,7 +15,7 @@ function covertPokeApiDetailToPokemon(pokeDetail) {
     return pokemon;
 }
 
-pokeApi.getPokemonDetail = (pokemon) => {
+pokeApi.getPokemonDetail = async (pokemon) => {
     return fetch(pokemon.url)
             .then((response) => response.json())
             .then(covertPokeApiDetailToPokemon)
@@ -30,6 +30,22 @@ pokeApi.getPokemons = async (offset = 0, limit = 10) => {
         .then((detailRequest) => Promise.all(detailRequest))
         .then((pokemonDetails) => pokemonDetails)
         .catch((error) => console.log(error));
+}
+
+pokeApi.getPokemonById = async (pokemonId) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
+    return fetch(url)
+        .then((response) => response.json())
+        .then(covertPokeApiDetailToPokemon)
+        .then((pokemon) => pokemon)
+}
+
+pokeApi.getPokemonAbilities = async (pokemonId) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
+    return fetch(url)
+        .then((response) => response.json())
+        .then((pokemon) => pokemon.abilities)
+        .then((abilities) => abilities.map((ability => ability.ability.name)))
 }
 
 
