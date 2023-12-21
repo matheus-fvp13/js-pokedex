@@ -1,6 +1,6 @@
-const pokemonList = document.getElementById('pokemons');
-const loadMorebutton = document.getElementById('loadMoreButton');
-const pokemonCardModal = document.getElementById('pokemon-card-modal');
+const pokemonList = document.getElementById('js-pokemon-list');
+const loadMorebutton = document.getElementById('js-load-more-button');
+const pokemonCardModal = document.getElementById('js-pokemon-card-modal');
 
 
 const limit = 10;
@@ -10,14 +10,14 @@ let offset = 0;
 function loadPokemonItens(offset, limit) {
     pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         pokemonList.innerHTML += pokemons.map((pokemon) => `
-            <li class="pokemon ${pokemon.type}" onclick="viewPokemonDetail('${pokemon.number}')">
-                <span class="number">#${pokemon.number}</span>
-                <span class="name">${pokemon.name}</span>
-                <div class="detail">
-                    <ol class="types">
-                        ${pokemon.types.map((type) => `<li class="type ${type}">${type}</li>`).join('')}
+            <li class="pokemon-item ${pokemon.type}" onclick="viewPokemonDetail('${pokemon.number}')">
+                <span class="pokemon-item__number">#${pokemon.number}</span>
+                <span class="pokemon-item__name">${pokemon.name}</span>
+                <div class="pokemon-item__detail">
+                    <ol class="pokemon-item__types">
+                        ${pokemon.types.map((type) => `<li class="pokemon-item__types__type ${type}">${type}</li>`).join('')}
                     </ol>
-                    <img src="${pokemon.photo}" alt="${pokemon.name}">
+                    <img class="pokemon-item__detail__sprite" src="${pokemon.photo}" alt="${pokemon.name}">
                 </div>
             </li>`).join('');
     });
@@ -28,35 +28,35 @@ function loadPokemonDetail(pokemon_id) {
     .then((pokemon) => {
         pokemonCardModal.innerHTML = `
         <section class="pokemon-card ${pokemon.type}" id="pokemon-card">
-            <section class="pokemon-detail-top">
-                <button class="pokemon-card-btn" id="pokemon-card-btn" onclick='exitModal()'>Voltar</button>
-                <span class="pokemon-detail-top-id">#${pokemon.number}</span>
-                <span class="pokemon-detail-top-name">${pokemon.name}</span>
-                <div class="pokemon-detail-top-details">
-                    <ol class="pokemon-detail-top-types">
-                        ${pokemon.types.map((type => `<li class="type" style="background-color: var(--${type})">${type}</li>`)).join('')}
+            <section class="pokemon-card__top">
+                <button class="pokemon-card__top__button" id="pokemon-card-btn" onclick='exitModal()'>Voltar</button>
+                <span class="pokemon-card__top__id">#${pokemon.number}</span>
+                <span class="pokemon-card__top__name">${pokemon.name}</span>
+                <div class="pokemon-card__top__details">
+                    <ol class="pokemon-card__top__details__types">
+                        ${pokemon.types.map((type => `<li class="pokemon-card__top__details__types__type" style="background-color: var(--${type})">${type}</li>`)).join('')}
                     </ol>
-                    <img class="pokemon-detail-top-image" src="${pokemon.photo}" alt="${pokemon.name}">
+                    <img class="pokemon-card__top__details__sprite" src="${pokemon.photo}" alt="${pokemon.name}">
                 </div>
             </section>
-            <section class="pokemon-detail-bottom">
+            <section class="pokemon-card__bottom">
                 <nav>
-                    <ul class="pokemon-card-menu">
-                        <li class="menu-item">
+                    <ul class="pokemon-card__bottom__menu">
+                        <li class="pokemon-card__bottom__menu__item">
                             Details
                         </li>
-                        <li class="menu-item">
+                        <li class="pokemon-card__bottom__menu__item">
                             Moves
                         </li>
-                        <li class="menu-item">
+                        <li class="pokemon-card__bottom__menu__item">
                             Status
                         </li>
-                        <li class="menu-item">
+                        <li class="pokemon-card__bottom__menu__item">
                             Evolution
                         </li>
                     </ul>
                 </nav>
-                <section class="item-detail" id="item_detail">
+                <section class="pokemon-card__bottom__detail" id="item_detail">
 
                 </section>
             </section>
@@ -75,7 +75,8 @@ function exitModal() {
     pokemonCardModal.innerHTML = '';
 }
 
-loadPokemonItens(offset, limit)
+//loadPokemonItens(offset, limit)
+viewPokemonDetail(1)
 
 loadMorebutton.addEventListener('click', () => {
     offset += limit;

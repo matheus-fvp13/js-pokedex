@@ -22,7 +22,7 @@
     flex-direction: column;
 }
 
-.pokemon-detail-top {
+.pokemon-card__top {
     margin-top: 1rem;
     margin-left: 1.5rem;
     height: 50%;
@@ -34,7 +34,7 @@
     justify-content: center;
 }
 
-.pokemon-card-btn {
+.pokemon-card__top__button {
     width: 20%;
     border: 2px solid #FFF;
     border-radius: 10px;
@@ -44,27 +44,26 @@
     margin: 1.5rem 0;
 }
 
-.pokemon-card-btn:hover {
+.pokemon-card__top__button:hover {
     background-color: rgba(128, 128, 128, 0.452);
 }
 
-.pokemon-detail-top-name {
+.pokemon-card__top__name {
     font-size: 1.75rem;
     text-transform: capitalize;
 }
 
-.pokemon-detail-top-details {
+.pokemon-card__top__details {
     display: flex;
     justify-content: space-between;
 }
 
-.pokemon-detail-top-types {
+.pokemon-card__top__details__types {
     list-style: none;
     margin-top: 1rem;
 }
 
-.pokemon-detail-top-types
-.type {
+.pokemon-card__top__details__types__type {
     border: 1px solid #FFF;
     border-radius: 1rem;
     font-size: 0.800rem;
@@ -74,33 +73,33 @@
     text-align: center;
 }
 
-.pokemon-detail-top-image {
+.pokemon-card__top__details__sprite {
     width: 100%;
     height: 260px;
 }
 
 
 /*pokemon bottom detail*/
-.pokemon-detail-bottom {
+.pokemon-card__bottom {
     margin-top: 1rem;
 }
 
-.pokemon-card-menu {
+.pokemon-card__bottom__menu {
     list-style: none;
     display: flex;
     justify-content: space-around;
 }
 
-.menu-item {
+.pokemon-card__bottom__menu__item {
     padding: 0.5rem;
     font-size: 1.25rem;
 }
 
-.menu-item:hover {
+.pokemon-card__bottom__menu__item:hover {
     border-bottom: 3px solid #FFF;
 }
 
-.item-detail {
+.pokemon-card__bottom__item-detail {
     font-weight: 300;
     padding: .625rem 1rem;
     justify-content: flex-start;
