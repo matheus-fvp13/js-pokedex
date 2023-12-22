@@ -2,6 +2,8 @@ const pokemonList = document.getElementById('js-pokemon-list');
 const loadMorebutton = document.getElementById('js-load-more-button');
 const pokemonCardModal = document.getElementById('js-pokemon-card-modal');
 
+const pokemonId = 1;
+
 
 const limit = 10;
 const maxRecords = 151;
@@ -23,8 +25,8 @@ function loadPokemonItens(offset, limit) {
     });
 }
 
-function loadPokemonDetail(pokemon_id) {
-    pokeApi.getPokemonById(pokemon_id)
+async function loadPokemonDetail(pokemon_id) {
+    await pokeApi.getPokemonById(pokemon_id)
     .then((pokemon) => {
         pokemonCardModal.innerHTML = `
         <section class="pokemon-card ${pokemon.type}" id="pokemon-card">
@@ -42,26 +44,43 @@ function loadPokemonDetail(pokemon_id) {
             <section class="pokemon-card__bottom">
                 <nav>
                     <ul class="pokemon-card__bottom__menu">
-                        <li class="pokemon-card__bottom__menu__item">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-details">
                             Details
                         </li>
-                        <li class="pokemon-card__bottom__menu__item">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-moves" onclick="loadMoves(${pokemon_id})">
                             Moves
                         </li>
-                        <li class="pokemon-card__bottom__menu__item">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-status">
                             Status
                         </li>
-                        <li class="pokemon-card__bottom__menu__item">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-evolution">
                             Evolution
                         </li>
                     </ul>
                 </nav>
-                <section class="pokemon-card__bottom__detail" id="item_detail">
-
+                <section class="pokemon-card__bottom__info" id="js-item_info">
                 </section>
             </section>
         </section>`
     })
+    //loadMoves(pokemon_id);
+    document.getElementById("js-info-details").addEventListener('click', clearPokemonInfo);
+    document.getElementById("js-info-status").addEventListener('click', clearPokemonInfo);
+    document.getElementById("js-info-evolution").addEventListener('click', clearPokemonInfo);
+    
+
+}
+
+function loadMoves(pokemon_id) {
+    const item_detail = document.getElementById("js-item_info")
+    pokeApi.getPokemonMoves(pokemon_id)
+        .then((moves = []) => {
+            item_detail.innerHTML = `
+            <div class="pokemon-card__bottom__info--moves">
+             ${moves.map((move) => `<p class="pokemon-card__bottom__info--moves__move">${move}</p>
+            `).join('')} 
+            </div>`;
+        })
 }
 
 function viewPokemonDetail(id) {
@@ -73,6 +92,11 @@ function viewPokemonDetail(id) {
 function exitModal() {
     pokemonCardModal.style.display = 'none';
     pokemonCardModal.innerHTML = '';
+}
+
+function clearPokemonInfo() {
+    const item_detail = document.getElementById("js-item_info")
+    item_detail.innerHTML = "";
 }
 
 //loadPokemonItens(offset, limit)

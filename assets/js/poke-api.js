@@ -40,12 +40,13 @@ pokeApi.getPokemonById = async (pokemonId) => {
         .then((pokemon) => pokemon)
 }
 
-pokeApi.getPokemonAbilities = async (pokemonId) => {
+pokeApi.getPokemonMoves = async (pokemonId) => {
     const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
     return fetch(url)
         .then((response) => response.json())
-        .then((pokemon) => pokemon.abilities)
-        .then((abilities) => abilities.map((ability => ability.ability.name)))
+        .then((pokemon) => pokemon.moves)
+        .then((moves) => moves.map((move => move.move.name)))
+        .then((moves) => moves.slice(0, 10))
 }
 
 
