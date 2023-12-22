@@ -115,6 +115,12 @@
     gap: .75rem;
 }
 
+.pokemon-card__bottom__info--status {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
 .pokemon-card__bottom__info--moves__move {
     font-size: 1.25rem; 
     font-weight: normal;
@@ -123,5 +129,20 @@
     border-radius: 1.5rem;
     padding: .5rem .25rem;
 }
+
+.pokemon-card__bottom__info--status__fields {
+    display: flex;
+    justify-content: space-around;
+    font-size: 1.25rem;
+}
+
+.pokemon-card__bottom__info--status__description {
+    overflow: scroll;
+    border: 1px solid rgba(128, 128, 128, 0.705);
+    border-radius: 1.rem;
+    padding: 0.5rem 0.25rem;
+    height: 200px;
+}
+
 
 

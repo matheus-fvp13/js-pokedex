@@ -2,8 +2,6 @@ const pokemonList = document.getElementById('js-pokemon-list');
 const loadMorebutton = document.getElementById('js-load-more-button');
 const pokemonCardModal = document.getElementById('js-pokemon-card-modal');
 
-const pokemonId = 1;
-
 
 const limit = 10;
 const maxRecords = 151;
@@ -44,7 +42,7 @@ async function loadPokemonDetail(pokemon_id) {
             <section class="pokemon-card__bottom">
                 <nav>
                     <ul class="pokemon-card__bottom__menu">
-                        <li class="pokemon-card__bottom__menu__item" id="js-info-details">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-details" onclick="infoDetails(${pokemon_id})">
                             Details
                         </li>
                         <li class="pokemon-card__bottom__menu__item" id="js-info-moves" onclick="loadMoves(${pokemon_id})">
@@ -59,6 +57,14 @@ async function loadPokemonDetail(pokemon_id) {
                     </ul>
                 </nav>
                 <section class="pokemon-card__bottom__info" id="js-item_info">
+                    <div class="pokemon-card__bottom__info--status">
+                        <div class=pokemon-card__bottom__info--status__fields>
+                            <p>Height<br>${pokemon.height}</p>
+                            <p>Weight<br>${pokemon.weight} lbs</p>
+                        </div>
+                        <p class="pokemon-card__bottom__info--status__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
+                        </p>
+                    </div>  
                 </section>
             </section>
         </section>`
@@ -83,6 +89,22 @@ function loadMoves(pokemon_id) {
         })
 }
 
+function infoDetails(pokemon_id) {
+    const item_detail = document.getElementById("js-item_info")
+    pokeApi.getPokemonById(pokemon_id)
+    .then((pokemon) => {
+    item_detail.innerHTML = `
+    <div class="pokemon-card__bottom__info--status">
+        <div class=pokemon-card__bottom__info--status__fields>
+            <p>Height<br>${pokemon.height}</p>
+            <p>Weight<br>${pokemon.weight} lbs</p>
+        </div>
+        <p class="pokemon-card__bottom__info--status__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
+        </p>
+    </div>`
+    });
+}
+
 function viewPokemonDetail(id) {
     pokemonCardModal.style.display = 'flex';
     pokemonCardModal.style.alignItems = 'center';
@@ -100,7 +122,7 @@ function clearPokemonInfo() {
 }
 
 //loadPokemonItens(offset, limit)
-viewPokemonDetail(1)
+viewPokemonDetail(35)
 
 loadMorebutton.addEventListener('click', () => {
     offset += limit;

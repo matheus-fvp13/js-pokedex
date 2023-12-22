@@ -4,6 +4,8 @@ function covertPokeApiDetailToPokemon(pokeDetail) {
     const pokemon = new Pokemon();
     pokemon.name = pokeDetail.name;
     pokemon.number = pokeDetail.id;
+    pokemon.height = pokeDetail.height;
+    pokemon.weight = pokeDetail.weight;
 
     const types = pokeDetail.types.map((typeSlot) => typeSlot.type.name);
     const [type] = types;
