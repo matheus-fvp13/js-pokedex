@@ -48,7 +48,7 @@ async function loadPokemonDetail(pokemon_id) {
                         <li class="pokemon-card__bottom__menu__item" id="js-info-moves" onclick="loadMoves(${pokemon_id})">
                             Moves
                         </li>
-                        <li class="pokemon-card__bottom__menu__item" id="js-info-status">
+                        <li class="pokemon-card__bottom__menu__item" id="js-info-status" onclick="loadStats(${pokemon_id})">
                             Status
                         </li>
                         <li class="pokemon-card__bottom__menu__item" id="js-info-evolution">
@@ -70,8 +70,6 @@ async function loadPokemonDetail(pokemon_id) {
         </section>`
     })
     //loadMoves(pokemon_id);
-    document.getElementById("js-info-details").addEventListener('click', clearPokemonInfo);
-    document.getElementById("js-info-status").addEventListener('click', clearPokemonInfo);
     document.getElementById("js-info-evolution").addEventListener('click', clearPokemonInfo);
     
 
@@ -84,6 +82,18 @@ function loadMoves(pokemon_id) {
             item_detail.innerHTML = `
             <div class="pokemon-card__bottom__info--moves">
              ${moves.map((move) => `<p class="pokemon-card__bottom__info--moves__move">${move}</p>
+            `).join('')} 
+            </div>`;
+        })
+}
+
+function loadStats(pokemon_id) {
+    const item_detail = document.getElementById("js-item_info")
+    pokeApi.getPokemonStats(pokemon_id)
+        .then((stats = []) => {
+            item_detail.innerHTML = `
+            <div class="pokemon-card__bottom__info--stats">
+             ${stats.map((stat) => ` <p><span class="stat-label">${stat}</span> <progress value=${Math.round(Math.random() * 100)} max="100" class="pokemon-card__bottom__info--stats__stat"></progress></p>
             `).join('')} 
             </div>`;
         })
@@ -121,8 +131,7 @@ function clearPokemonInfo() {
     item_detail.innerHTML = "";
 }
 
-//loadPokemonItens(offset, limit)
-viewPokemonDetail(35)
+loadPokemonItens(offset, limit)
 
 loadMorebutton.addEventListener('click', () => {
     offset += limit;

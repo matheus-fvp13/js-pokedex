@@ -51,5 +51,14 @@ pokeApi.getPokemonMoves = async (pokemonId) => {
         .then((moves) => moves.slice(0, 10))
 }
 
+pokeApi.getPokemonStats = async (pokemonId) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`
+    return fetch(url)
+        .then((response) => response.json())
+        .then((pokemon) => pokemon.stats)
+        .then((stats) => stats.map((stat => stat.stat.name)))
+        .then((stats) => stats.slice(0, 6))
+}
+
 
 
