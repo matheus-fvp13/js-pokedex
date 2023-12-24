@@ -7,8 +7,8 @@ const limit = 10;
 const maxRecords = 151;
 let offset = 0;
 
-function loadPokemonItens(offset, limit) {
-    pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
+async function loadPokemonItens(offset, limit) {
+    await pokeApi.getPokemons(offset, limit).then((pokemons = []) => {
         pokemonList.innerHTML += pokemons.map((pokemon) => `
             <li class="pokemon-item ${pokemon.type}" onclick="viewPokemonDetail('${pokemon.number}')">
                 <span class="pokemon-item__number">#${pokemon.number}</span>
@@ -28,16 +28,16 @@ async function loadPokemonDetail(pokemon_id) {
     .then((pokemon) => {
         pokemonCardModal.innerHTML = `
         <section class="pokemon-card ${pokemon.type}" id="pokemon-card">
+            <button class="pokemon-card__button" id="pokemon-card-btn" onclick='exitModal()'><img src="assets/images/icons8-fechar.svg" alt="exit" width="100%"></button>
             <section class="pokemon-card__top">
-                <button class="pokemon-card__top__button" id="pokemon-card-btn" onclick='exitModal()'>Voltar</button>
-                <span class="pokemon-card__top__id">#${pokemon.number}</span>
-                <span class="pokemon-card__top__name">${pokemon.name}</span>
                 <div class="pokemon-card__top__details">
+                    <span class="pokemon-card__top__details__id">#${pokemon.number}</span>
+                    <span class="pokemon-card__top____details__name">${pokemon.name}</span>
                     <ol class="pokemon-card__top__details__types">
                         ${pokemon.types.map((type => `<li class="pokemon-card__top__details__types__type" style="background-color: var(--${type})">${type}</li>`)).join('')}
                     </ol>
-                    <img class="pokemon-card__top__details__sprite" src="${pokemon.photo}" alt="${pokemon.name}">
                 </div>
+                <div><img class="pokemon-card__top__sprite" src="${pokemon.photo}" alt="${pokemon.name}"></div>
             </section>
             <section class="pokemon-card__bottom">
                 <nav>
@@ -57,12 +57,12 @@ async function loadPokemonDetail(pokemon_id) {
                     </ul>
                 </nav>
                 <section class="pokemon-card__bottom__info" id="js-item_info">
-                    <div class="pokemon-card__bottom__info--status">
-                        <div class=pokemon-card__bottom__info--status__fields>
+                    <div class="pokemon-card__bottom__info--details">
+                        <div class="pokemon-card__bottom__info--details__fields">
                             <p>Height<br>${pokemon.height}</p>
                             <p>Weight<br>${pokemon.weight} lbs</p>
                         </div>
-                        <p class="pokemon-card__bottom__info--status__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
+                        <p class="pokemon-card__bottom__info--details__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
                         </p>
                     </div>  
                 </section>
@@ -104,14 +104,14 @@ function infoDetails(pokemon_id) {
     pokeApi.getPokemonById(pokemon_id)
     .then((pokemon) => {
     item_detail.innerHTML = `
-    <div class="pokemon-card__bottom__info--status">
-        <div class=pokemon-card__bottom__info--status__fields>
+    <div class="pokemon-card__bottom__info--details">
+        <div class="pokemon-card__bottom__info--details__fields">
             <p>Height<br>${pokemon.height}</p>
             <p>Weight<br>${pokemon.weight} lbs</p>
         </div>
-        <p class="pokemon-card__bottom__info--status__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
+        <p class="pokemon-card__bottom__info--details__description"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porttitor sem vitae ornare blandit. Mauris et sodales metus. Aenean suscipit mi risus, ac tincidunt erat auctor at. Nunc faucibus ipsum ligula, ac ultricies tellus bibendum in. Etiam tempor sapien a blandit consectetur. Aliquam faucibus sapien non ex maximus consequat. Aenean euismod consequat enim, vitae finibus urna finibus id. Vestibulum ultrices non sapien non dictum. Curabitur non massa molestie, porta libero quis, porta sapien. Praesent eget ante at nunc ultricies laoreet. In finibus placerat magna cursus congue. Quisque non placerat lectus, sit amet porta libero.  
         </p>
-    </div>`
+        </div>`
     });
 }
 
@@ -132,6 +132,7 @@ function clearPokemonInfo() {
 }
 
 loadPokemonItens(offset, limit)
+//viewPokemonDetail(6)
 
 loadMorebutton.addEventListener('click', () => {
     offset += limit;
