@@ -179,6 +179,12 @@
         max-height: 700px;
     }
 
+    .pokemon-card__top {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     .pokemon-card__button {
         width: 30px;
     }
@@ -192,7 +198,7 @@
     }
 
     .pokemon-card__top__sprite {
-        height: 300px
+        height: 250px;
     }
 
     .pokemon-card__bottom {
@@ -210,6 +216,10 @@
         overflow-x: hidden;
         overflow-y: hidden;
     }
+
+    .pokemon-card__bottom__info--moves {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
     
 }
 
@@ -217,12 +227,6 @@
     .pokemon-card {
         max-width: 500px;
         margin-inline: auto;
-    }
-
-    .pokemon-card__top {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: center;
     }
 
     .pokemon-card__top__details__types__type {
